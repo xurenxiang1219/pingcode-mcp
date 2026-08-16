@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "pingcodeWiki": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/dist/index.js",
+        "--stdio"
+      ],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  }
+}

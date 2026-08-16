@@ -6,6 +6,7 @@
     ".env.example",
     ".env.stdio.local.example",
     ".gitignore",
+    ".vscode/mcp.json",
     "Dockerfile",
     "README.md",
     "compose.yaml",

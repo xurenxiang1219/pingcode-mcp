@@ -22,15 +22,21 @@ Hash，方便在技術規格或程式碼變更中追溯來源。
 適合單一受信任使用者，以企業應用憑據存取 PingCode：
 
 ```bash
-npm install
+git clone https://github.com/xurenxiang1219/pingcode-mcp.git
+cd pingcode-mcp
+npm ci
 cp .env.stdio.local.example .env
 # 編輯 .env，填入 PINGCODE_CLIENT_ID 與 PINGCODE_CLIENT_SECRET
 npm run build
-node /absolute/path/to/pingcode-mcp/dist/index.js --stdio
 ```
 
-MCP Client 應直接啟動 `node` 及編譯後的 `dist/index.js`，避免 npm 輸出干擾 stdio 協議。
-可參考 `examples/clients/vscode.mcp.example.json`。
+完成後用 VS Code 開啟此資料夾。專案已包含可直接使用的 `.vscode/mcp.json`，它會以
+`${workspaceFolder}/dist/index.js --stdio` 啟動 Server，並讀取同資料夾的 `.env`；不需要再填寫
+絕對路徑或把 Secret 寫進 MCP 設定檔。首次啟動時，於 VS Code 確認信任此 MCP Server。
+
+若要在另一個程式碼專案中使用，請將 `.vscode/mcp.json` 的 server 設定複製到該 IDE 的使用者
+設定，並將 `args[0]`、`cwd` 與 `envFile` 改為本機 `pingcode-mcp` clone 的絕對路徑。Cursor、
+Qoder、ZCode 等其他 Client 可參考 `examples/clients/generic.mcp.example.json`。
 
 ### HTTP User OAuth
 
