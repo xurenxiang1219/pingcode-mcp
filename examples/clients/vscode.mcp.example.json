@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "pingcode": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/ABSOLUTE/PATH/TO/ping-code-mcp/dist/index.js",
+        "--stdio"
+      ]
+    }
+  }
+}

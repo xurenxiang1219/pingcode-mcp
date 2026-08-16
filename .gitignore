@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.compose.local
+.env.production.local
+.DS_Store
+coverage/
+*.log

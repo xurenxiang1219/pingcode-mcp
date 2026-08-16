@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "pingcode": {
+      "url": "https://mcp.example.com/mcp"
+    }
+  }
+}

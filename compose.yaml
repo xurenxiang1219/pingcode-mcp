@@ -1,0 +1,54 @@
+name: pingcode-mcp
+
+services:
+  redis:
+    image: redis:7.4-alpine
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --appendfsync
+      - everysec
+      - --maxmemory-policy
+      - noeviction
+    volumes:
+      - pingcode-mcp-redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  mcp:
+    build:
+      context: .
+    image: pingcode-mcp:local
+    init: true
+    env_file:
+      - ${COMPOSE_MCP_ENV_FILE:-.env}
+    environment:
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "3000"
+      MCP_ALLOW_REMOTE: "true"
+      MCP_ALLOWED_HOSTS: "${MCP_DOCKER_ALLOWED_HOSTS:-localhost,127.0.0.1}"
+      MCP_PUBLIC_BASE_URL: "${MCP_DOCKER_PUBLIC_BASE_URL:-http://localhost:3000}"
+      MCP_OAUTH_STORE: redis
+      MCP_OAUTH_REDIS_URL: redis://redis:6379
+      MCP_OAUTH_CIMD_ENABLED: "true"
+    ports:
+      - "${MCP_DOCKER_BIND_ADDRESS:-127.0.0.1}:${MCP_DOCKER_HOST_PORT:-3000}:3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  pingcode-mcp-redis:
