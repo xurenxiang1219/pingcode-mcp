@@ -5,7 +5,10 @@
       "args": [
         "/ABSOLUTE/PATH/TO/ping-code-mcp/dist/index.js",
         "--stdio"
-      ]
+      ],
+      "env": {
+        "PINGCODE_ENV_FILE": "/ABSOLUTE/PRIVATE/PATH/pingcode-mcp.env"
+      }
     }
   }
 }

@@ -36,7 +36,17 @@ npm run build
 
 若要在另一個程式碼專案中使用，請將 `.vscode/mcp.json` 的 server 設定複製到該 IDE 的使用者
 設定，並將 `args[0]`、`cwd` 與 `envFile` 改為本機 `pingcode-mcp` clone 的絕對路徑。Cursor、
-Qoder、ZCode 等其他 Client 可參考 `examples/clients/generic.mcp.example.json`。
+Qoder、ZCode 等其他 Client 可參考 `examples/clients/generic.mcp.example.json`，透過以下配置引用
+私有環境檔：
+
+```json
+"env": {
+  "PINGCODE_ENV_FILE": "/absolute/private/path/to/pingcode-mcp.env"
+}
+```
+
+也可以在 Client 的 `env` 直接傳入 Client ID 與 Secret，但它們會明文保存在 MCP 配置中，
+只適合短期本機排查；不要提交、同步或分享該配置。
 
 ### HTTP User OAuth
 

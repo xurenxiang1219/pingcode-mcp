@@ -6,7 +6,9 @@
       "args": [
         "/ABSOLUTE/PATH/TO/ping-code-mcp/dist/index.js",
         "--stdio"
-      ]
+      ],
+      "cwd": "/ABSOLUTE/PATH/TO/ping-code-mcp",
+      "envFile": "/ABSOLUTE/PRIVATE/PATH/pingcode-mcp.env"
     }
   }
 }
